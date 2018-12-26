@@ -7,7 +7,7 @@
 //
 
 #import "NSDateCalculateHelper.h"
-#import "DateTools.h"
+#import <DateTools.h>
 #import "NSDate+Category.h"
 
 
@@ -194,6 +194,17 @@
 - (NSString *)getParaFormatStringWithParaDate:(NSDate *)paraDate{
     return [_formatter stringFromDate:paraDate];
 }
+
+- (NSString *)getFormatTimeAndWeekOfMonthWithTimeInterval:(NSTimeInterval)timeInterval format:(NSString *)format{
+    if (format.length > 0) {
+        [self setFormatString:format];
+    }
+    NSDate *timeDate = [self getParaDateSince1970WithTimeIntavel:timeInterval];
+    NSInteger unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
+    NSDateComponents *comp = [_calender components:unitFlags fromDate:timeDate];
+    return [NSString stringWithFormat:@"%@ %@",[self getParaFormatStringWithParaDate:timeDate],[self weekDay:[comp weekday]]];
+}
+
 // 根据paraDate 获取1970年时间戳
 - (NSTimeInterval)getParaTimeIntervalWithParaDate:(NSDate *)paraDate{
     return [paraDate timeIntervalSince1970];
@@ -204,10 +215,51 @@
     return [_currentDate timeIntervalSince1970];
 }
 
+
+- (NSInteger)compareTimeInterval:(NSTimeInterval)timeInterval{
+    NSTimeInterval currentTimeInterval = [self getCurrentTimeInterval];
+    if (timeInterval < currentTimeInterval) {
+        return -1;
+    }else if(timeInterval == currentTimeInterval){
+        return 0;
+    }else{
+        return 1;
+    }
+}
+
 - (void)setFormatString:(NSString *)formatString{
     _formatString = formatString;
     [_formatter setDateFormat:formatString];
 }
 
+- (NSString *)weekDay:(NSInteger)week{
+    NSString *weekStr = nil;
+    switch (week) {
+        case 1:
+            weekStr = @"星期天";
+            break;
+        case 2:
+            weekStr = @"星期一";
+            break;
+        case 3:
+            weekStr = @"星期二";
+            break;
+        case 4:
+            weekStr = @"星期三";
+            break;
+        case 5:
+            weekStr = @"星期四";
+            break;
+        case 6:
+            weekStr = @"星期五";
+            break;
+        case 7:
+            weekStr = @"星期六";
+            break;
+        default:
+            break;
+    }
+    return weekStr;
+}
 
 @end

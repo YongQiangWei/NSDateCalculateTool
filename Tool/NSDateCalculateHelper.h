@@ -147,6 +147,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (NSString *) getParaFormatStringWithParaDate:(NSDate *)paraDate;
 
+/**
+ * 指定时间戳 获取格式化时间以及星期
+ * @para timeInterval 指定时间戳
+ * @format 时间格式化
+ * @return 格式化时间 星期
+ */
+- (NSString *) getFormatTimeAndWeekOfMonthWithTimeInterval:(NSTimeInterval )timeInterval format:(NSString *) format;
 #pragma mark ------ NSTimeInterval
 
 /**
@@ -175,6 +182,14 @@ NS_ASSUME_NONNULL_BEGIN
  * 获取当前时间戳
  */
 - (NSTimeInterval) getCurrentTimeInterval;
+
+#pragma mark ------ 时间比较
+/**
+ * 时间前后顺序比较
+ * @para timeInterval 比较时间戳
+ * @return -1:h过去 0:现在 1:将来
+ */
+- (NSInteger ) compareTimeInterval:(NSTimeInterval )timeInterval;
 
 @end
 
