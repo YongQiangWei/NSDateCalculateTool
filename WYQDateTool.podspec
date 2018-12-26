@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "WYQDateTool"
-  s.version      = "1.0.0"
+  s.version      = "1.0.1"
   s.summary      = "NSDate+Category 添加时间描述、时间转换（默认格式化与指定格式化）
 "
 

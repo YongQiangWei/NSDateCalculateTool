@@ -7,7 +7,7 @@
 //
 
 #import "NSDateCalculateHelper.h"
-#import <DateTools.h>
+#import "DateTools.h"
 #import "NSDate+Category.h"
 
 
@@ -30,11 +30,7 @@
         singleton.calender = [NSCalendar currentCalendar];
         [singleton.calender setFirstWeekday:2];// 设置每周开始时间为 周一
         singleton.formatter = [[NSDateFormatter alloc] init];
-        if (singleton.formatString.length > 0) {
-            [singleton.formatter setDateFormat:singleton.formatString];
-        }else{
-            [singleton.formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];            
-        }
+        [singleton.formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     });
     return singleton;
 }
@@ -230,6 +226,11 @@
 - (void)setFormatString:(NSString *)formatString{
     _formatString = formatString;
     [_formatter setDateFormat:formatString];
+}
+
+- (void)setCalendarFisrtWeek:(NSInteger)calendarFisrtWeek{
+    _calendarFisrtWeek = calendarFisrtWeek;
+    [_calender setFirstWeekday:calendarFisrtWeek];
 }
 
 - (NSString *)weekDay:(NSInteger)week{

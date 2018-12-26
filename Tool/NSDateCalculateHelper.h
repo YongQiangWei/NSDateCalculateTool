@@ -13,10 +13,11 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSDateCalculateHelper : NSObject
 /**格式化时间 默认:yyyy-MM-dd HH:mm:ss*/
 @property (nonatomic, copy) NSString *formatString;
-
+@property (nonatomic, assign) NSInteger calendarFisrtWeek;
 /**
  * 单例创建
  * formatString 格式化时间 默认 yyyy-MM-dd HH:mm:ss
+ * calendarFisrtWeek 日历默认设置每周开始时间为 周一 FirstWeekday = 2
  */
 + (NSDateCalculateHelper *) sharedCalculateHelper;
 
@@ -56,14 +57,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)getFisrtDayWithYear:(NSInteger)year month:(NSInteger)month format:(NSString *) format;
 
 /**
- * 指定年月获取当前NSDate
- * @para year 指定年份
- * @para month 指定月份
- * @treturn NSDate
- */
-- (NSDate *)getParaDateWithYear:(NSInteger) year month:(NSInteger) month format:(NSString *)format;
-
-/**
  * 计算当前年 月份 总共天数
  * @para year 年份
  * @para month 月份
@@ -84,6 +77,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (NSString *) getCurrentDateInWeekOfFirstDayAndEndingDay;
 
+#pragma mark ------ 周日期
+
 /**
  * 指定年 月 本月第几周 获取本周开始至结束时间array
  * @para year 年份
@@ -92,6 +87,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return 本周起止数组
  */
 - (NSArray *) getParaDateArrayWithYear:(NSInteger)year month:(NSInteger) month weekOfMonth:(NSInteger) weekOfMonth;
+#pragma mark ------ 时间描述 （仿朋友圈）
 /**
  * 指定时间戳 与当前时间对比 获取时间描述
  * @para timeInterval 时间戳
@@ -99,6 +95,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (NSString *) getParaTimeDescriputionWithTimeInterval:(NSTimeInterval ) timeInterval;
 #pragma mark ------ NSDate
+/**
+ * 指定年月获取当前NSDate
+ * @para year 指定年份
+ * @para month 指定月份
+ * @treturn NSDate
+ */
+- (NSDate *)getParaDateWithYear:(NSInteger) year month:(NSInteger) month format:(NSString *)format;
 
 /**
  * 传入时间戳获取NSDate SinceNow
@@ -114,7 +117,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (NSDate *)getParaDateSince1970WithTimeIntavel:(NSTimeInterval )paraTimeInterval;
 
-#pragma mark ------ NSString format
+#pragma mark ------ 时间格式化输出
 
 /**
  * 传入时间戳获取格式化时间 Since1970
