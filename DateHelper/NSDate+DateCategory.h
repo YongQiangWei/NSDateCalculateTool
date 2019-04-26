@@ -1,25 +1,23 @@
-/************************************************************
-  *  * EaseMob CONFIDENTIAL 
-  * __________________ 
-  * Copyright (C) 2013-2014 EaseMob Technologies. All rights reserved. 
-  *  
-  * NOTICE: All information contained herein is, and remains 
-  * the property of EaseMob Technologies.
-  * Dissemination of this information or reproduction of this material 
-  * is strictly forbidden unless prior written permission is obtained
-  * from EaseMob Technologies.
-  */
+//
+//  NSDate+DateCategory.h
+//  NSDateCalculateHelper
+//
+//  Created by YongQiang Wei on 2019/4/26.
+//  Copyright © 2019 YongQiang Wei. All rights reserved.
+//
 
 #import <Foundation/Foundation.h>
 
-#define D_MINUTE	60
-#define D_HOUR		3600
-#define D_DAY		86400
-#define D_WEEK		604800
-#define D_YEAR		31556926
+#define D_MINUTE    60
+#define D_HOUR        3600
+#define D_DAY        86400
+#define D_WEEK        604800
+#define D_YEAR        31556926
 
-@interface NSDate (Category)
 
+NS_ASSUME_NONNULL_BEGIN
+
+@interface NSDate (DateCategory)
 - (NSString *)timeIntervalDescription;//距离当前的时间间隔描述
 - (NSString *)minuteDescription;/*精确到分钟的日期描述*/
 - (NSString *)formattedTime;
@@ -36,7 +34,7 @@
 + (NSDate *) dateWithHoursBeforeNow: (NSInteger) dHours;
 + (NSDate *) dateWithMinutesFromNow: (NSInteger) dMinutes;
 + (NSDate *) dateWithMinutesBeforeNow: (NSInteger) dMinutes;
-
++ (NSDate *)dateWithYear:(NSInteger)year month:(NSInteger)month day:(NSInteger)day;
 // Comparing dates
 - (BOOL) isEqualToDateIgnoringTime: (NSDate *) aDate;
 - (BOOL) isToday;
@@ -90,5 +88,6 @@
 @property (readonly) NSInteger weekday;
 @property (readonly) NSInteger nthWeekday; // e.g. 2nd Tuesday of the month == 2
 @property (readonly) NSInteger year;
-
 @end
+
+NS_ASSUME_NONNULL_END
